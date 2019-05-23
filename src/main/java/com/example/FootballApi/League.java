@@ -8,7 +8,7 @@ public class League {
 
     private String id;
     private String name;
-    private ArrayList<Club> clubs = new ArrayList<>();
+    private ArrayList<Club> clubs;
 
 
     public League(String id, String name) {
@@ -40,6 +40,10 @@ public class League {
 
 
     public ArrayList<Club> getClubs() {
+
+        if(clubs == null) {
+            clubs = new ArrayList<>();
+        }
         return clubs;
     }
 

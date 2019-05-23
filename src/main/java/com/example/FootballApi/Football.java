@@ -5,60 +5,34 @@ import java.util.List;
 
 public class Football {
     private List<League> leagueList;
-    private List<Club> clubList;
     public League clubArrayRef;
 
     public Football() {
         this.leagueList = new ArrayList<>();
-        this.clubList = new ArrayList<>();
         addMockData();
     }
 
-    public List<League> getLeague(String searchId) {
-        if (searchId.equals(""))
+    // ----- LEAGUES -----
+
+    public void addLeague(League league) {
+        leagueList.add(league);
+    }
+
+    public List<League> getLeague(String searchString) {
+        if (searchString.equals(""))
             return leagueList;
 
         ArrayList<League> leagueMembers = new ArrayList<>();
         for (League leagueMember : leagueList) {
-            if (leagueMember.getName().toLowerCase().contains(searchId.toLowerCase()))
+            if (leagueMember.getName().toLowerCase().contains(searchString.toLowerCase()))
                 leagueMembers.add(leagueMember);
         }
         return leagueMembers;
     }
 
-    public League getFootballLeague(String id) {
+    public League getFootballLeagueById(String id) {
 
         return findLeagueByID(id);
-    }
-
-    public Club getFootballClub(String id) {
-
-        return  findClubById(id);
-    }
-
-    public Club findClubById(String id) {
-        /*for (Club item : clubList) {
-            if (item.getId().equals(id))
-                return item;*/
-
-        ArrayList<Club> clubMember = new ArrayList<>();
-        for (League league : leagueList) {
-            for (Club club : league.getClubs()) {
-                if (club.getId().equals(id));
-                    clubMember.add(club);
-                return club;
-            }
-        }
-        return null;
-    }
-
-
-    public void addClubByLeagueId(String id, Club club) {
-        for (League item : leagueList) {
-            if (item.getId().equals(id))
-                item.addClubsToArray(club);
-               // clubList.add(club);
-        }
     }
 
     private League findLeagueByID(String id) {
@@ -73,36 +47,39 @@ public class Football {
     public League deleteLeague(String leagueId) {
         for (League leagueToDelete: leagueList) {
             if (leagueToDelete.getId().equals(leagueId))
-            leagueList.remove(leagueToDelete);
+                leagueList.remove(leagueToDelete);
             return leagueToDelete;
         }
         return null;
     }
 
-    public Club deleteClub(String clubId) {
-        for (League league: leagueList) {
-            for (Club clubToDelete: league.getClubs()) {
-                if (clubToDelete.getId().equals(clubId))
-                    league.deleteClub(clubToDelete);
+    // ----- CLUBS -----
 
-                return clubToDelete;
+    public Club getFootballClubById(String id) {
+
+        return  findClubById(id);
+    }
+
+    public Club findClubById(String id) {
+
+        for (League league : leagueList) {
+            for (Club club : league.getClubs()) {
+                if (club.getId().equals(id))
+                    return club;
             }
-
         }
         return null;
     }
 
-    public void addLeague(League league) {
-        leagueList.add(league);
-    }
-
-    public void addClub(Club club) {
-        clubList.add(club);
+    public void addClubByLeagueId(String id, Club club) {
+        for (League item : leagueList) {
+            if (item.getId().equals(id))
+                item.addClubsToArray(club);
+               // clubList.add(club);
+        }
     }
 
     public List<Club> getClub(String searchString) {
-        if (searchString.equals(""))
-            return clubArrayRef.getClubs();
 
         ArrayList<Club> clubMembers = new ArrayList<>();
         for (League league : leagueList) {
@@ -113,6 +90,20 @@ public class Football {
         }
         return clubMembers;
     }
+
+    public Club deleteClub(String clubId) {
+        for (League league: leagueList) {
+            for (Club clubToDelete: league.getClubs()) {
+                if (clubToDelete.getId().equals(clubId))
+                    league.deleteClub(clubToDelete);
+
+                return clubToDelete;
+            }
+        }
+        return null;
+    }
+
+    // ----- DATA SETUP WITH 3 PRE LEGUES -----
 
     private void addMockData() {
         League league1 = new League("1", "Premier League");
