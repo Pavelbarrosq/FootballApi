@@ -66,5 +66,23 @@ public class FootballController {
         return club;
     }
 
+    // OPTIONALS
+
+    @RequestMapping(value = "/leagues/{leagueId}/clubs/{clubId}", method = RequestMethod.GET)
+    public List<Club> getClubIdByLeagueId (@PathVariable("leagueId") String leagueId, @PathVariable("clubId") String clubId)  {
+
+
+        return football.getClubsByLeagueId(leagueId, clubId);
+    }
+
+    @RequestMapping(value = "/leagues/{leagueId}/clubs/{clubId}", method = RequestMethod.DELETE)
+    public void deleteClubByLeagueId (@PathVariable("leagueId") String leagueId, @PathVariable("clubId") String clubId) {
+
+        football.deleteClubByLeagueId(leagueId, clubId);
+
+    }
+
+
+
 
 }

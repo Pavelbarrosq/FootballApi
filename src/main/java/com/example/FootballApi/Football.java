@@ -74,8 +74,7 @@ public class Football {
     public void addClubByLeagueId(String id, Club club) {
         for (League item : leagueList) {
             if (item.getId().equals(id))
-                item.addClubsToArray(club);
-               // clubList.add(club);
+                item.getClubs().add(club);
         }
     }
 
@@ -113,5 +112,33 @@ public class Football {
         leagueList.add(league1);
         leagueList.add(league2);
         leagueList.add(league3);
+    }
+    
+
+    public List<Club> getClubsByLeagueId(String leagueId, String clubId) {
+
+        ArrayList<Club> newClubList = new ArrayList<>();
+
+        for (League leagueItem: leagueList) {
+            if (leagueItem.getId().equals(leagueId))
+                  for (Club clubItem: leagueItem.getClubs()) {
+                      if (clubItem.getId().equals(clubId))
+                          newClubList.add(clubItem);
+
+                  }
+
+        }
+        return newClubList;
+    }
+
+    public void deleteClubByLeagueId(String leagueId, String clubId) {
+        for (League leagueItem: leagueList) {
+            if (leagueItem.getId().equals(leagueId))
+                for (Club clubItem: leagueItem.getClubs()) {
+                    if (clubItem.getId().equals(clubId))
+                        leagueItem.getClubs().remove(clubItem);
+                }
+            
+        }
     }
 }

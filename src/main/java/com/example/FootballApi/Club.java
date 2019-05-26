@@ -6,11 +6,6 @@ public class Club {
 
     private String id;
     private String name;
-   // private League league;
-
-    public  Club() {
-
-    }
 
     public Club(String id, String name) {
         this.id = id;
@@ -33,6 +28,5 @@ public class Club {
     public void setName(String name) {
         this.name = name;
     }
-
 
 }

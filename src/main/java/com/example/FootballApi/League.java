@@ -47,10 +47,6 @@ public class League {
         return clubs;
     }
 
-    public void addClubsToArray(Club club) {
-        clubs.add(club);
-    }
-
     public void setClubs(ArrayList<Club> clubs) {
         this.clubs = clubs;
     }
